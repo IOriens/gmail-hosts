@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon index.js -d 3"
+    "start": "node index.js",
+    "dev": "nodemon index.js -d 3"
   },
   "keywords": ["hosts","gmail","imap"],
   "author": "Junjie.xyz",
