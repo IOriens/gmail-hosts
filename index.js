@@ -1,8 +1,9 @@
-var dns = require("dns");
-var sqlite3 = require("sqlite3").verbose();
-var db = new sqlite3.Database("./gmail.db");
+const dns = require("dns");
 const fs = require("fs-extra");
 const { resolve } = require("path");
+const sqlite3 = require("sqlite3").verbose();
+
+const db = new sqlite3.Database("./gmail.db");
 
 dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
@@ -11,8 +12,8 @@ const initTable = () => {
 };
 
 const insertRecords = records => {
-  var stmt = db.prepare("INSERT OR IGNORE INTO ips VALUES (?)");
-  for (var i = 0; i < records.length; i++) {
+  let stmt = db.prepare("INSERT OR IGNORE INTO ips VALUES (?)");
+  for (let i = 0; i < records.length; i++) {
     stmt.run(records[i]);
   }
   stmt.finalize();
@@ -31,14 +32,21 @@ const genHosts = rows => {
 };
 
 const getRecordsAndGenHosts = async () => {
-  let rows = await getRecords();
-  await genHosts(rows);
+  try {
+    let rows = await getRecords();
+    await genHosts(rows);
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 initTable();
 
 setInterval(() => {
   dns.resolve4("imap.gmail.com", function(err, addresses, family) {
+    if (err) {
+      console.log(err);
+    }
     console.log(new Date());
     console.log(addresses);
     insertRecords(addresses);
