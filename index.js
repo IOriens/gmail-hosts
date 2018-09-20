@@ -46,6 +46,7 @@ setInterval(() => {
   dns.resolve4("imap.gmail.com", function(err, addresses, family) {
     if (err) {
       console.log(err);
+      return
     }
     console.log(new Date());
     console.log(addresses);
