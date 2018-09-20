@@ -1,0 +1,19 @@
+{
+  "name": "gmail-hosts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js -d 3"
+  },
+  "keywords": ["hosts","gmail","imap"],
+  "author": "Junjie.xyz",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  },
+  "dependencies": {
+    "fs-extra": "^7.0.0",
+    "sqlite3": "^4.0.2"
+  }
+}
